@@ -1,0 +1,1390 @@
+/*
+====================================================================
+ FILE: chat.css
+ PURPOSE: Chat UI styling for AI Workspace
+ STATUS: PRODUCTION – DO NOT MODIFY WITHOUT REVIEW
+ OWNER: Frontend Team
+====================================================================
+*/
+
+ /*
+        ====================================================================
+         ROOT THEME VARIABLES
+         ------------------------------------------------------------------
+         These variables define the entire color system of the application.
+
+         WHY VARIABLES?
+         - Centralized theming
+         - Easier future dark/light modes
+         - Consistent UI behavior
+
+         IMPORTANT:
+         Changing values here affects the ENTIRE application.
+        ====================================================================
+        */
+        :root {
+
+            /*
+            ---------------------------------------------------------------
+             BACKGROUND COLORS
+            ---------------------------------------------------------------
+            */
+            --bg-main: #131314;          /* Main app background */
+            --bg-sidebar: #1e1f20;       /* Sidebar background */
+            --bg-input: #1e1f20;         /* Input pill background */
+            --bg-hover: #333537;         /* Hover states */
+
+
+            /*
+            ---------------------------------------------------------------
+             TEXT COLORS
+            ---------------------------------------------------------------
+            */
+            --text-main: #e3e3e3;         /* Primary text */
+            --text-muted: #c4c7c5;        /* Secondary / muted text */
+
+
+            /*
+            ---------------------------------------------------------------
+             ACCENT COLORS
+            ---------------------------------------------------------------
+            */
+            --accent-blue: #a8c7fa;       /* Active / highlighted elements */
+
+        }
+
+
+
+        /*
+        ====================================================================
+         BASE DOCUMENT STYLES
+         ------------------------------------------------------------------
+         Applies to the entire document.
+
+         RESPONSIBILITIES:
+         - Layout foundation
+         - Font setup
+         - Background + text color
+         - Scroll containment
+        ====================================================================
+        */
+        body {
+
+            /*
+            ---------------------------------------------------------------
+             LAYOUT
+            ---------------------------------------------------------------
+            */
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+
+
+            /*
+            ---------------------------------------------------------------
+             SPACING RESET
+            ---------------------------------------------------------------
+            */
+            margin: 0;
+
+
+            /*
+            ---------------------------------------------------------------
+             TYPOGRAPHY
+            ---------------------------------------------------------------
+            */
+            font-family: 'Google Sans', sans-serif;
+
+
+            /*
+            ---------------------------------------------------------------
+             COLORS
+            ---------------------------------------------------------------
+            */
+            background-color: var(--bg-main);
+            color: var(--text-main);
+
+        }
+
+                /*
+        ====================================================================
+         SIDEBAR: MAIN CONTAINER
+         ------------------------------------------------------------------
+         The sidebar is responsible for:
+         - Navigation
+         - Chat session history
+         - New chat creation
+
+         BEHAVIOR NOTES:
+         - Fixed width
+         - Can be collapsed via JS
+         - Flex column layout
+        ====================================================================
+        */
+        .sidebar {
+
+            /*
+            ---------------------------------------------------------------
+             DIMENSIONS
+            ---------------------------------------------------------------
+            */
+            width: 280px;
+
+
+            /*
+            ---------------------------------------------------------------
+             LAYOUT
+            ---------------------------------------------------------------
+            */
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+
+
+            /*
+            ---------------------------------------------------------------
+             COLORS
+            ---------------------------------------------------------------
+            */
+            background-color: var(--bg-sidebar);
+
+
+            /*
+            ---------------------------------------------------------------
+             ANIMATION
+             (Used when collapsing / expanding sidebar)
+            ---------------------------------------------------------------
+            */
+            transition: width 0.3s;
+
+        }
+
+
+
+        /*
+        ====================================================================
+         SIDEBAR HEADER
+         ------------------------------------------------------------------
+         Contains:
+         - Hamburger menu button
+         - (Optional) branding elements
+        ====================================================================
+        */
+        .sidebar-header {
+
+            /*
+            ---------------------------------------------------------------
+             SPACING
+            ---------------------------------------------------------------
+            */
+            padding: 15px 20px;
+
+
+            /*
+            ---------------------------------------------------------------
+             LAYOUT
+            ---------------------------------------------------------------
+            */
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+        }
+
+
+
+        /*
+        ====================================================================
+         MENU BUTTON (HAMBURGER)
+         ------------------------------------------------------------------
+         Used in:
+         - Sidebar header
+         - Main chat header (backup button)
+
+         JS TARGET:
+         - Sidebar toggle logic depends on `.menu-btn`
+        ====================================================================
+        */
+        .menu-btn {
+
+            /*
+            ---------------------------------------------------------------
+             RESET
+            ---------------------------------------------------------------
+            */
+            background: transparent;
+            border: none;
+
+
+            /*
+            ---------------------------------------------------------------
+             APPEARANCE
+            ---------------------------------------------------------------
+            */
+            color: var(--text-muted);
+            border-radius: 50%;
+
+
+            /*
+            ---------------------------------------------------------------
+             INTERACTION
+            ---------------------------------------------------------------
+            */
+            cursor: pointer;
+            transition: 0.2s;
+
+
+            /*
+            ---------------------------------------------------------------
+             LAYOUT
+            ---------------------------------------------------------------
+            */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+
+        }
+
+        .menu-btn:hover {
+            background-color: var(--bg-hover);
+            color: var(--text-main);
+        }
+
+
+
+        /*
+        ====================================================================
+         LOGO / BRAND TEXT
+         ------------------------------------------------------------------
+         Displays app name inside the top bar.
+         Static text (non-clickable).
+        ====================================================================
+        */
+        .logo-text {
+
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--text-main);
+            cursor: default;
+
+        }
+
+
+
+        /*
+        ====================================================================
+         NEW CHAT CONTAINER
+         ------------------------------------------------------------------
+         Wrapper for the "New chat" action.
+        ====================================================================
+        */
+        .new-chat-container {
+
+            padding: 10px 20px 20px 20px;
+
+        }
+
+
+
+        /*
+        ====================================================================
+         NEW CHAT BUTTON
+         ------------------------------------------------------------------
+         ACTION:
+         - Starts a brand new chat session
+
+         NOTES:
+         - Styled as pill button
+         - No background by default
+        ====================================================================
+        */
+        .new-chat-btn {
+
+            /*
+            ---------------------------------------------------------------
+             LAYOUT
+            ---------------------------------------------------------------
+            */
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+
+
+            /*
+            ---------------------------------------------------------------
+             APPEARANCE
+            ---------------------------------------------------------------
+            */
+            background: transparent;
+            border: none;
+            border-radius: 50px;
+
+
+            /*
+            ---------------------------------------------------------------
+             SPACING
+            ---------------------------------------------------------------
+            */
+            padding: 10px 15px 10px 10px;
+
+
+            /*
+            ---------------------------------------------------------------
+             TEXT
+            ---------------------------------------------------------------
+            */
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-decoration: none;
+            font-family: 'Google Sans', sans-serif;
+
+
+            /*
+            ---------------------------------------------------------------
+             INTERACTION
+            ---------------------------------------------------------------
+            */
+            cursor: pointer;
+            transition: 0.2s;
+
+        }
+
+        .new-chat-btn:hover {
+            background-color: var(--bg-hover);
+            color: var(--text-main);
+        }
+
+                /*
+        ====================================================================
+         CHAT HISTORY LIST
+         ------------------------------------------------------------------
+         Displays:
+         - Recent chat sessions
+         - Active chat highlight
+         - Delete action (hover only)
+
+         DATA SOURCE:
+         - Django template loop (chat_sessions)
+        ====================================================================
+        */
+        .history-list {
+
+            /*
+            ---------------------------------------------------------------
+             LAYOUT
+            ---------------------------------------------------------------
+            */
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+
+
+            /*
+            ---------------------------------------------------------------
+             SCROLLING
+            ---------------------------------------------------------------
+            */
+            overflow-y: auto;
+
+
+            /*
+            ---------------------------------------------------------------
+             SPACING
+            ---------------------------------------------------------------
+            */
+            padding: 0 10px;
+            gap: 2px;
+
+        }
+
+
+
+        /*
+        ====================================================================
+         HISTORY SECTION LABEL
+         ------------------------------------------------------------------
+         Static label (e.g., "Recent")
+        ====================================================================
+        */
+        .history-label {
+
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-main);
+            padding: 10px 15px;
+
+        }
+
+
+
+        /*
+        ====================================================================
+         HISTORY ITEM CONTAINER
+         ------------------------------------------------------------------
+         Wraps:
+         - Chat title link
+         - Delete (more_vert) button
+
+         STATES:
+         - Default
+         - Hover
+         - Active (current chat)
+        ====================================================================
+        */
+        .history-item-container {
+
+            /*
+            ---------------------------------------------------------------
+             LAYOUT
+            ---------------------------------------------------------------
+            */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+
+            /*
+            ---------------------------------------------------------------
+             SPACING
+            ---------------------------------------------------------------
+            */
+            padding: 10px 15px;
+            border-radius: 50px;
+
+
+            /*
+            ---------------------------------------------------------------
+             INTERACTION
+            ---------------------------------------------------------------
+            */
+            cursor: pointer;
+            transition: 0.2s;
+
+
+            /*
+            ---------------------------------------------------------------
+             TEXT
+            ---------------------------------------------------------------
+            */
+            color: var(--text-main);
+            text-decoration: none;
+
+        }
+
+        .history-item-container:hover {
+            background-color: var(--bg-hover);
+        }
+
+        .history-item-container.active {
+            background-color: rgba(168, 199, 250, 0.12);
+            color: var(--accent-blue);
+        }
+
+
+
+        /*
+        ====================================================================
+         HISTORY LINK (CHAT TITLE)
+         ------------------------------------------------------------------
+         Truncated with ellipsis if too long.
+        ====================================================================
+        */
+        .history-link {
+
+            flex: 1;
+            font-size: 0.9rem;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            text-decoration: none;
+            color: inherit;
+
+        }
+
+
+
+        /*
+        ====================================================================
+         DELETE BUTTON (MORE MENU)
+         ------------------------------------------------------------------
+         Visibility:
+         - Hidden by default
+         - Appears on row hover
+        ====================================================================
+        */
+        .delete-btn {
+
+            display: flex;
+            align-items: center;
+
+            padding: 4px;
+            border-radius: 50%;
+
+            color: var(--text-muted);
+            text-decoration: none;
+
+            opacity: 0;
+            transition: 0.2s;
+
+        }
+
+        .history-item-container:hover .delete-btn {
+            opacity: 1;
+        }
+
+        .delete-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ff8a8a;
+        }
+
+                /*
+        ====================================================================
+         MAIN CHAT CONTAINER
+         ------------------------------------------------------------------
+         Holds:
+         - Top navigation bar
+         - Chat window
+         - Input area
+        ====================================================================
+        */
+        .main-chat {
+
+            /*
+            ---------------------------------------------------------------
+             LAYOUT
+            ---------------------------------------------------------------
+            */
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+
+
+            /*
+            ---------------------------------------------------------------
+             POSITIONING
+             (Required for absolute-positioned input container)
+            ---------------------------------------------------------------
+            */
+            position: relative;
+
+        }
+
+
+
+        /*
+        ====================================================================
+         TOP BAR (HEADER INSIDE MAIN CHAT)
+         ------------------------------------------------------------------
+         Displays:
+         - Backup menu button (when sidebar is collapsed)
+         - App name (Nexus)
+         - Future user/avatar actions
+        ====================================================================
+        */
+        .top-bar {
+
+            /*
+            ---------------------------------------------------------------
+             DIMENSIONS
+            ---------------------------------------------------------------
+            */
+            height: 64px;
+
+
+            /*
+            ---------------------------------------------------------------
+             SPACING
+            ---------------------------------------------------------------
+            */
+            padding: 15px 20px;
+            box-sizing: border-box;
+
+
+            /*
+            ---------------------------------------------------------------
+             LAYOUT
+            ---------------------------------------------------------------
+            */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+        }
+
+
+
+        /*
+        ====================================================================
+         TOP BAR LEFT SECTION
+         ------------------------------------------------------------------
+         Contains:
+         - Backup menu button
+         - Logo text
+        ====================================================================
+        */
+        .top-bar .left {
+
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+        }
+
+
+
+        /*
+        ====================================================================
+         TOP BAR RIGHT SECTION
+         ------------------------------------------------------------------
+         Reserved for:
+         - User avatar
+         - Account actions
+        ====================================================================
+        */
+        .top-bar .right {
+
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+        }
+
+
+
+        /*
+        ====================================================================
+         AVATAR CIRCLE (OPTIONAL / FUTURE USE)
+         ------------------------------------------------------------------
+         Currently commented out in HTML but styles are retained.
+        ====================================================================
+        */
+        .avatar-circle {
+
+            width: 32px;
+            height: 32px;
+
+            border-radius: 50%;
+
+            background-color: #fbbc04;
+            color: black;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-weight: bold;
+            font-size: 0.9rem;
+
+        }
+
+                /*
+        ====================================================================
+         CHAT WINDOW
+         ------------------------------------------------------------------
+         This is the main scrollable conversation area.
+
+         BEHAVIOR:
+         - Scrolls vertically
+         - Auto-scroll handled via JavaScript
+         - Centered content with max-width
+        ====================================================================
+        */
+        .chat-window {
+
+            /*
+            ---------------------------------------------------------------
+             LAYOUT
+            ---------------------------------------------------------------
+            */
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+
+            /*
+            ---------------------------------------------------------------
+             SCROLLING
+            ---------------------------------------------------------------
+            */
+            overflow-y: auto;
+            scroll-behavior: smooth;
+
+
+            /*
+            ---------------------------------------------------------------
+             SPACING
+            ---------------------------------------------------------------
+            */
+            padding-bottom: 150px;
+
+        }
+
+
+
+        /*
+        ====================================================================
+         WELCOME SCREEN (EMPTY CHAT STATE)
+         ------------------------------------------------------------------
+         Shown when there are no messages in the chat.
+        ====================================================================
+        */
+        .welcome-screen {
+
+            max-width: 850px;
+            padding: 0 20px;
+
+            margin-top: -50px;
+
+            height: 100%;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+        }
+
+
+
+        /*
+        ====================================================================
+         WELCOME SPARKLE ICON
+         ------------------------------------------------------------------
+         Decorative animated sparkle shown before greeting text.
+        ====================================================================
+        */
+        .sparkle {
+
+            font-size: 2.5rem;
+
+            animation: twinkle 3s infinite ease-in-out;
+
+            color: #d4af37;
+
+            text-shadow:
+                0 0 4px rgba(212, 175, 55, 0.6),
+                0 0 8px rgba(212, 175, 55, 0.4);
+
+        }
+
+
+
+        /*
+        ====================================================================
+         MAIN GREETING TEXT
+        ====================================================================
+        */
+        .greeting {
+
+            font-size: 3.5rem;
+            font-weight: 500;
+
+            margin: 0;
+
+            color: #d4af37;
+            letter-spacing: -1px;
+
+        }
+
+
+
+        /*
+        ====================================================================
+         SUB GREETING TEXT
+        ====================================================================
+        */
+        .sub-greeting {
+
+            font-size: 3.5rem;
+            font-weight: 500;
+
+            margin: 0;
+
+            color: #444746;
+            letter-spacing: -1px;
+
+        }
+
+
+
+        /*
+        ====================================================================
+         SPARKLE ANIMATION
+        ====================================================================
+        */
+        @keyframes twinkle {
+
+            0% {
+                opacity: 0.7;
+                text-shadow:
+                    0 0 4px rgba(212, 175, 55, 0.4),
+                    0 0 8px rgba(212, 175, 55, 55, 0.2);
+            }
+
+            50% {
+                opacity: 1;
+                text-shadow:
+                    0 0 6px rgba(212, 175, 55, 0.8),
+                    0 0 12px rgba(212, 175, 55, 0.6);
+            }
+
+            100% {
+                opacity: 0.7;
+                text-shadow:
+                    0 0 4px rgba(212, 175, 55, 0.4),
+                    0 0 8px rgba(212, 175, 55, 0.2);
+            }
+
+        }
+
+                /*
+        ====================================================================
+         MESSAGE WRAPPER
+         ------------------------------------------------------------------
+         Holds all chat messages for a session.
+         Centered with a max width for readability.
+        ====================================================================
+        */
+        .messages-wrapper {
+
+            width: 100%;
+            max-width: 850px;
+
+            padding: 20px;
+
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+
+        }
+
+
+
+        /*
+        ====================================================================
+         MESSAGE ROW
+         ------------------------------------------------------------------
+         Generic row container for both user and AI messages.
+        ====================================================================
+        */
+        .message-row {
+
+            width: 100%;
+
+            display: flex;
+            gap: 15px;
+
+        }
+
+
+
+        /*
+        ====================================================================
+         USER MESSAGE ROW
+         ------------------------------------------------------------------
+         Right-aligned message bubble.
+        ====================================================================
+        */
+        .message-row.user {
+
+            justify-content: flex-end;
+
+        }
+
+
+
+        /*
+        ====================================================================
+         USER MESSAGE BUBBLE
+         ------------------------------------------------------------------
+         Displays user-submitted text.
+        ====================================================================
+        */
+        .user-bubble {
+
+            background-color: var(--bg-hover);
+
+            padding: 12px 20px;
+            border-radius: 25px;
+
+            font-size: 1rem;
+            line-height: 1.5;
+
+            max-width: 80%;
+
+        }
+
+
+
+        /*
+        ====================================================================
+         AI MESSAGE CONTENT
+         ------------------------------------------------------------------
+         Text content returned by the AI.
+        ====================================================================
+        */
+        .ai-content {
+
+            flex: 1;
+
+            padding-top: 5px;
+
+            font-size: 1rem;
+            line-height: 1.6;
+
+        }
+
+
+
+        /*
+        ====================================================================
+         AI AVATAR (SPARKLE ICON)
+         ------------------------------------------------------------------
+         Decorative indicator for AI messages.
+        ====================================================================
+        */
+        .ai-avatar {
+
+            font-size: 1.5rem;
+
+            margin-top: 2px;
+            flex-shrink: 0;
+
+            animation: sparkle 2s infinite ease-in-out;
+
+        }
+
+
+
+        /*
+        ====================================================================
+         AI AVATAR ANIMATION
+        ====================================================================
+        */
+        @keyframes sparkle {
+
+            0% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+
+        }
+
+                /*
+        ====================================================================
+         FLOATING INPUT CONTAINER
+         ------------------------------------------------------------------
+         Positioned at the bottom of the chat window.
+         Uses gradient fade to blend into chat history.
+        ====================================================================
+        */
+        .input-container {
+
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            width: 100%;
+            max-width: 850px;
+
+            padding: 0 20px;
+            box-sizing: border-box;
+
+            z-index: 10;
+
+            background: linear-gradient(
+                180deg,
+                rgba(19, 19, 20, 0) 0%,
+                #131314 40%
+            );
+
+            padding-top: 40px;
+
+        }
+
+
+
+        /*
+        ====================================================================
+         INPUT BOX (PILL)
+         ------------------------------------------------------------------
+         Contains:
+         - File upload button
+         - Text input
+         - Send button
+        ====================================================================
+        */
+        .input-box {
+
+            background-color: var(--bg-input);
+
+            border-radius: 35px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 10px 15px;
+
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+
+        }
+
+
+
+        /*
+        ====================================================================
+         TEXT INPUT FIELD
+        ====================================================================
+        */
+        .input-box input[type="text"] {
+
+            background: transparent;
+            border: none;
+
+            color: var(--text-main);
+
+            font-size: 1.05rem;
+
+            padding: 15px 10px;
+
+            flex-grow: 1;
+
+            font-family: 'Google Sans', sans-serif;
+
+        }
+
+        .input-box input:focus {
+            outline: none;
+        }
+
+
+
+        /*
+        ====================================================================
+         ICON BUTTONS (UPLOAD / SEND)
+        ====================================================================
+        */
+        .icon-btn {
+
+            background: transparent;
+            border: none;
+
+            color: var(--text-muted);
+
+            width: 44px;
+            height: 44px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+            margin: 0;
+
+        }
+
+        .icon-btn:hover {
+            background-color: var(--bg-hover);
+            color: var(--text-main);
+        }
+
+
+
+        /*
+        ====================================================================
+         SEND BUTTON (OVERRIDE COLOR)
+        ====================================================================
+        */
+        .send-btn {
+            color: var(--text-main);
+        }
+
+
+
+        /*
+        ====================================================================
+         DISCLAIMER (OPTIONAL / CURRENTLY DISABLED)
+        ====================================================================
+        */
+        .disclaimer {
+
+            text-align: center;
+
+            font-size: 0.75rem;
+
+            color: var(--text-muted);
+
+            margin-top: 15px;
+            margin-bottom: 5px;
+
+        }
+
+                /*
+        ====================================================================
+         PDF CARD (INLINE DOCUMENT PREVIEW TRIGGER)
+         ------------------------------------------------------------------
+         Shown inside AI messages when a PDF is uploaded.
+        ====================================================================
+        */
+        .pdf-card {
+
+            background-color: var(--bg-sidebar);
+
+            border-radius: 12px;
+
+            padding: 12px 16px;
+
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+
+            cursor: pointer;
+
+            border: 1px solid rgba(255, 255, 255, 0.05);
+
+            margin-bottom: 10px;
+
+        }
+
+        .pdf-card:hover {
+            background-color: var(--bg-hover);
+        }
+
+
+
+        /*
+        ====================================================================
+         PDF CARD ICON & TEXT
+        ====================================================================
+        */
+        .pdf-icon {
+            color: #ea4335;
+            font-size: 1.8rem;
+        }
+
+        .pdf-name {
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .pdf-hint {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+
+
+        /*
+        ====================================================================
+         PDF MODAL OVERLAY
+         ------------------------------------------------------------------
+         Fullscreen overlay for PDF preview.
+        ====================================================================
+        */
+        .pdf-modal {
+
+            display: none;
+
+            position: fixed;
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            background-color: rgba(0, 0, 0, 0.8);
+
+            z-index: 2000;
+
+            justify-content: center;
+            align-items: center;
+
+        }
+
+
+
+        /*
+        ====================================================================
+         PDF MODAL CONTENT
+        ====================================================================
+        */
+        .pdf-modal-content {
+
+            background: var(--bg-sidebar);
+
+            width: 85%;
+            height: 90%;
+
+            border-radius: 15px;
+
+            display: flex;
+            flex-direction: column;
+
+            overflow: hidden;
+
+        }
+
+
+
+        /*
+        ====================================================================
+         PDF MODAL HEADER
+        ====================================================================
+        */
+        .pdf-header {
+
+            padding: 15px 20px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            background: #282a2c;
+
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+        }
+
+
+
+        /*
+        ====================================================================
+         PDF MODAL CLOSE BUTTON
+        ====================================================================
+        */
+        .close-btn {
+
+            background: none;
+            border: none;
+
+            color: var(--text-muted);
+
+            font-size: 1.5rem;
+
+            cursor: pointer;
+
+        }
+
+        .close-btn:hover {
+            color: white;
+        }
+
+
+
+        /*
+        ====================================================================
+         PDF IFRAME
+        ====================================================================
+        */
+        iframe {
+
+            width: 100%;
+            height: 100%;
+
+            border: none;
+
+        }
+
+
+
+        /*
+        ====================================================================
+         CUSTOM SCROLLBAR (WEBKIT)
+        ====================================================================
+        */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #555;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #777;
+        }
+
+
+
+        /*
+        ====================================================================
+         SIDEBAR COLLAPSE / EXPAND STYLES
+         ------------------------------------------------------------------
+         Controlled via JavaScript toggle.
+        ====================================================================
+        */
+        .sidebar {
+            transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .sidebar.collapsed {
+            margin-left: -280px;
+        }
+
+
+
+        /*
+        ====================================================================
+         BACKUP MENU BUTTON (MAIN CHAT)
+         ------------------------------------------------------------------
+         Appears only when sidebar is collapsed.
+        ====================================================================
+        */
+        .main-menu-btn {
+
+            display: none;
+
+            background: transparent;
+            border: none;
+
+            color: var(--text-muted);
+
+            cursor: pointer;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 8px;
+            border-radius: 50%;
+
+            transition: 0.2s;
+
+            margin-right: 5px;
+
+        }
+
+        .main-menu-btn:hover {
+            background-color: var(--bg-hover);
+            color: var(--text-main);
+        }
+
+            .sidebar.collapsed ~ .main-chat .main-menu-btn {
+                display: flex;
+            }

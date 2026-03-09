@@ -1,0 +1,20 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+langchain = "*"
+langchain-openai = "*"
+faiss-cpu = "*"
+pypdf = "*"
+python-dotenv = "*"
+langchain-community = "*"
+sentence-transformers = "*"
+langchain-huggingface = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.14"

@@ -1,0 +1,214 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<!--
+===========================================================================
+ AI WORKSPACE
+ --------------------------------------------------------------------------
+ This file is intentionally verbose and heavily documented.
+ Logic, structure, and behavior are IDENTICAL to the original working file.
+
+ PURPOSE:
+ - Readability
+ - Onboarding new developers
+ - Long-term maintenance
+ - Safe refactoring in the future
+
+ IMPORTANT RULE:
+ ❗ DO NOT change logic inside this file unless you know EXACTLY what you are doing.
+=========================================================================== 
+-->
+
+<head>
+
+    <!--
+    =======================================================================
+     META CONFIGURATION
+     -----------------------------------------------------------------------
+     Charset and viewport configuration.
+     These tags are REQUIRED for:
+     - Correct text rendering
+     - Responsive behavior
+     - Mobile compatibility
+    =======================================================================
+    -->
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+
+    <!--
+    =======================================================================
+     DOCUMENT TITLE
+     -----------------------------------------------------------------------
+     Visible in:
+     - Browser tab
+     - Bookmarks
+     - Search engine previews
+    =======================================================================
+    -->
+    <title>AI Workspace</title>
+
+
+    <!--
+    =======================================================================
+     GOOGLE FONT: GOOGLE SANS
+     -----------------------------------------------------------------------
+     Used as the primary UI font across the entire application.
+
+     Weights loaded:
+     - 400 (Regular)
+     - 500 (Medium)
+     - 600 (Semi-bold)
+
+     NOTE:
+     Do not remove or change weights unless updating typography globally.
+    =======================================================================
+    -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!--
+    =======================================================================
+     MATERIAL SYMBOLS (ICON SYSTEM)
+     -----------------------------------------------------------------------
+     Used for:
+     - Sidebar icons
+     - Buttons
+     - Action indicators
+
+     Configuration:
+     - opsz: Optical size
+     - wght: Weight
+     - FILL / GRAD: Icon styles
+    =======================================================================
+    -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        rel="stylesheet"
+    >
+
+    <!-- Project Styles css -->
+    <link rel="stylesheet" href="{% static 'css/chat.css' %}">
+
+    
+        </head>
+
+
+    
+        <body>
+    
+            <!--
+        =======================================================================
+        SIDEBAR NAVIGATION
+        ----------------------------------------------------------------------
+        Left-side navigation panel.
+        Contains:
+        - Menu toggle
+        - New chat button
+        - Recent chat history
+        =======================================================================
+        -->
+        {% include "partials/sidebar.html" %}
+      
+
+
+        <!--
+        =======================================================================
+        MAIN CHAT AREA
+        ----------------------------------------------------------------------
+        Right-side content area.
+        Contains:
+        - Top bar
+        - Chat messages
+        - Input field
+        =======================================================================
+        -->
+        <main class="main-chat">
+
+            <!-- --------------------------------------------------------------
+                TOP BAR
+                Displays logo and backup menu button
+            -------------------------------------------------------------- -->
+            <header class="top-bar">
+
+                <div class="left">
+                    <button type="button" class="menu-btn main-menu-btn">
+                        <span class="material-symbols-outlined">menu</span>
+                    </button>
+
+                    <span class="logo-text">Nexus</span>
+                </div>
+
+                <div class="right">
+                    <!-- Optional avatar placeholder -->
+                    <!-- <div class="avatar-circle">NR</div> -->
+                </div>
+
+            </header>
+
+
+            <!-- --------------------------------------------------------------
+                CHAT WINDOW
+                Displays welcome screen or messages
+            -------------------------------------------------------------- -->
+            {% include "partials/chat_window.html" %}
+
+
+
+
+                <!--
+    ===============================================================
+     FLOATING INPUT AREA
+     ---------------------------------------------------------------
+     Appears at the bottom of the chat window.
+     Contains:
+     - File upload (PDF)
+     - Text input
+     - Send button
+    ===============================================================
+    -->
+    {% include "partials/input_bar.html" %}
+
+
+
+        <!-- Optional disclaimer -->
+        <!-- <div class="disclaimer">This is an AI and can make mistakes.</div> -->
+
+    </div>
+
+
+</main>
+
+
+<!--
+=======================================================================
+ PDF MODAL
+ ----------------------------------------------------------------------
+ Used to preview uploaded PDF documents.
+ Opened via JavaScript (openPDFViewer).
+=======================================================================
+-->
+{% include "partials/pdf_modal.html" %}
+
+<!--
+=======================================================================
+ JAVASCRIPT LOGIC
+ ----------------------------------------------------------------------
+ IMPORTANT:
+ - This script is IDENTICAL to the original working version.
+ - ONLY comments and spacing were added.
+ - DO NOT refactor unless you understand all side effects.
+=======================================================================
+-->
+<script src="{% static 'js/chat.js' %}" defer></script>
+
+</body>
+</html>

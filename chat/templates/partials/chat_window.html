@@ -1,0 +1,78 @@
+{# ====================================================================== #}
+{#  CHAT WINDOW PARTIAL                                                   #}
+{# ---------------------------------------------------------------------- #}
+{#  RESPONSIBILITIES:                                                     #}
+{#   - Display welcome screen when no messages exist                      #}
+{#   - Render chat messages (AI + User)                                   #}
+{#                                                                        #}
+{#  DATA DEPENDENCIES:                                                    #}
+{#   - messages                                                          #}
+{#                                                                        #}
+{#  IMPORTANT:                                                           #}
+{#   - Logic is IDENTICAL to legacy file                                  #}
+{#   - No JavaScript is included here                                     #}
+{# ====================================================================== #}
+
+<div class="chat-window" id="chat-window">
+
+    {# ================================================================ #}
+    {#  EMPTY STATE (NO MESSAGES)                                       #}
+    {# ================================================================ #}
+    {% if not messages %}
+
+        <div class="welcome-screen">
+
+            <h1 class="greeting">
+                ✨ NAMESTE
+            </h1>
+
+            <h2 class="sub-greeting">
+                How can I help you today?
+            </h2>
+
+        </div>
+
+    {% else %}
+
+        {# ============================================================ #}
+        {#  MESSAGE LIST                                               #}
+        {# ============================================================ #}
+        <div class="messages-wrapper">
+
+            {% for msg in messages %}
+
+                <div class="message-row {{ msg.role }}">
+
+                    {# ------------------------------------------------ #}
+                    {#  AI MESSAGE                                     #}
+                    {# ------------------------------------------------ #}
+                    {% if msg.role == 'ai' %}
+
+                        <div class="ai-avatar">
+                            ✨
+                        </div>
+
+                        <div class="ai-content">
+                            {{ msg.content|safe }}
+                        </div>
+
+                    {% else %}
+
+                        {# -------------------------------------------- #}
+                        {#  USER MESSAGE                                #}
+                        {# -------------------------------------------- #}
+                        <div class="user-bubble">
+                            {{ msg.content|safe }}
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+</div>

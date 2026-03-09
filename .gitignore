@@ -1,0 +1,17 @@
+# Security
+.env
+
+# Database
+db.sqlite3
+
+# Uploaded Files
+media/
+uploads/
+
+# Vector Database
+faiss_index/
+
+# Python Cache
+__pycache__/
+*.pyc
+.pytest_cache/

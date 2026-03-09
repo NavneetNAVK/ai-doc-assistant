@@ -1,0 +1,57 @@
+{# ====================================================================== #}
+{#  PDF MODAL PARTIAL                                                     #}
+{# ---------------------------------------------------------------------- #}
+{#  RESPONSIBILITIES:                                                     #}
+{#   - Fullscreen PDF preview                                             #}
+{#   - Close action                                                       #}
+{#                                                                        #}
+{#  DEPENDS ON:                                                          #}
+{#   - openPDFViewer(url)                                                 #}
+{#   - closePDFViewer()                                                   #}
+{#                                                                        #}
+{#  IMPORTANT:                                                           #}
+{#   - IDs MUST remain unchanged                                          #}
+{#   - JavaScript relies on these selectors                               #}
+{# ====================================================================== #}
+
+<div id="pdfModal" class="pdf-modal">
+
+    <div class="pdf-modal-content">
+
+        {# ============================================================ #}
+        {#  MODAL HEADER                                               #}
+        {# ============================================================ #}
+        <div class="pdf-header">
+
+            <span
+                style="font-weight: 500; display: flex; align-items: center; gap: 10px;"
+            >
+                <span class="material-symbols-outlined">
+                    description
+                </span>
+                Document Preview
+            </span>
+
+            <button
+                class="close-btn"
+                onclick="closePDFViewer()"
+            >
+                <span class="material-symbols-outlined">
+                    close
+                </span>
+            </button>
+
+        </div>
+
+
+        {# ============================================================ #}
+        {#  PDF IFRAME                                                 #}
+        {# ============================================================ #}
+        <iframe
+            id="pdfFrame"
+            src=""
+        ></iframe>
+
+    </div>
+
+</div>

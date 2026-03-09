@@ -1,0 +1,109 @@
+{# ====================================================================== #}
+{#  SIDEBAR PARTIAL                                                       #}
+{# ---------------------------------------------------------------------- #}
+{#  RESPONSIBILITIES:                                                     #}
+{#   - Sidebar navigation                                                 #}
+{#   - New chat button                                                    #}
+{#   - Recent chat history                                                #}
+{#                                                                        #}
+{#  IMPORTANT:                                                           #}
+{#   - Logic is IDENTICAL to legacy file                                  #}
+{#   - Django template tags preserved                                     #}
+{#   - Safe for production use                                            #}
+{# ====================================================================== #}
+
+<nav class="sidebar">
+
+    {# ================================================================ #}
+    {#  SIDEBAR HEADER                                                   #}
+    {#  Contains the hamburger menu button                               #}
+    {# ================================================================ #}
+    <div class="sidebar-header">
+
+        <button class="menu-btn">
+            <span class="material-symbols-outlined">
+                menu
+            </span>
+        </button>
+
+    </div>
+
+
+    {# ================================================================ #}
+    {#  NEW CHAT ACTION                                                  #}
+    {#  Starts a brand new chat session                                  #}
+    {# ================================================================ #}
+    <div class="new-chat-container">
+
+        <a href="{% url 'new_chat' %}" class="new-chat-btn">
+
+            <span
+                class="material-symbols-outlined"
+                style="font-size: 20px;"
+            >
+                add
+            </span>
+
+            New chat
+
+        </a>
+
+    </div>
+
+
+    {# ================================================================ #}
+    {#  CHAT HISTORY LIST                                                #}
+    {#  Rendered dynamically using Django context                        #}
+    {# ================================================================ #}
+    <div class="history-list">
+
+        <div class="history-label">
+            Recent
+        </div>
+
+
+        {# ------------------------------------------------------------ #}
+        {#  LOOP THROUGH CHAT SESSIONS                                  #}
+        {# ------------------------------------------------------------ #}
+        {% for session in chat_sessions %}
+
+            {% if session.title != "New Conversation" %}
+
+                <div
+                    class="history-item-container
+                           {% if session.id == current_session.id %}active{% endif %}"
+                >
+
+                    {# Chat title link #}
+                    <a
+                        href="{% url 'chat_session' session.id %}"
+                        class="history-link"
+                    >
+                        {{ session.title|truncatechars:22 }}
+                    </a>
+
+
+                    {# Delete chat action #}
+                    <a
+                        href="{% url 'delete_chat' session.id %}"
+                        class="delete-btn"
+                        onclick="return confirm('Delete this chat?');"
+                        title="Delete"
+                    >
+                        <span
+                            class="material-symbols-outlined"
+                            style="font-size: 1.2rem;"
+                        >
+                            more_vert
+                        </span>
+                    </a>
+
+                </div>
+
+            {% endif %}
+
+        {% endfor %}
+
+    </div>
+
+</nav>

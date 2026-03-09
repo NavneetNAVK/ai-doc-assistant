@@ -1,0 +1,95 @@
+{# ====================================================================== #}
+{#  INPUT BAR PARTIAL                                                     #}
+{# ---------------------------------------------------------------------- #}
+{#  RESPONSIBILITIES:                                                     #}
+{#   - User message input                                                 #}
+{#   - PDF document upload                                                #}
+{#                                                                        #}
+{#  DATA DEPENDENCIES:                                                    #}
+{#   - CSRF token                                                         #}
+{#                                                                        #}
+{#  IMPORTANT:                                                           #}
+{#   - Logic is IDENTICAL to legacy file                                  #}
+{#   - Auto-submit on file select preserved                               #}
+{# ====================================================================== #}
+
+<div class="input-container">
+
+    <div class="input-box">
+
+        {# ============================================================ #}
+        {#  FILE UPLOAD FORM                                           #}
+        {# ============================================================ #}
+        <form
+            method="post"
+            enctype="multipart/form-data"
+            style="margin: 0; position: relative; width: 44px; height: 44px;"
+        >
+            {% csrf_token %}
+
+            {# Upload icon (visual only) #}
+            <div
+                class="icon-btn"
+                title="Upload Document"
+                style="position: absolute; top: 0; left: 0; pointer-events: none;"
+            >
+                <span class="material-symbols-outlined">
+                    add
+                </span>
+            </div>
+
+            {# Hidden file input #}
+            <input
+                type="file"
+                name="document"
+                accept="application/pdf"
+                style="
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    opacity: 0;
+                    cursor: pointer;
+                    z-index: 2;
+                "
+                onchange="this.form.submit();"
+            >
+        </form>
+
+
+        {# ============================================================ #}
+        {#  TEXT MESSAGE FORM                                          #}
+        {# ============================================================ #}
+        <form
+            method="post"
+            style="flex-grow: 1; display: flex; align-items: center; margin: 0;"
+        >
+            {% csrf_token %}
+
+            <input
+                type="text"
+                name="query"
+                placeholder="Ask me..."
+                required
+                autocomplete="off"
+            >
+
+            <button
+                type="submit"
+                class="icon-btn send-btn"
+                title="Send message"
+            >
+                <span class="material-symbols-outlined">
+                    send
+                </span>
+            </button>
+
+        </form>
+
+    </div>
+
+    {# Optional disclaimer #}
+    {# <div class="disclaimer">This is an AI and can make mistakes.</div> #}
+
+</div>
